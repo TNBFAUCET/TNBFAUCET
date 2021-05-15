@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container mt-5">
+    {% if messages %}
+    <div class="alert-container">
+        {% for message in messages %}
+            <div{% if message.tags %} class="alert alert-danger" {% endif %}>
+                <div class="alert-body">
+                    <strong>{{ message.tags }}!</strong> 
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <form method="post" enctype="multipart/form-data" >
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button class="btn btn-primary btn-block" type="submit">Add</button>
+    </form>
+</div>
+{% endblock %}
+{% block javascript %}
+<!-- MDB -->
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.js"
+></script>
+{% endblock %}
