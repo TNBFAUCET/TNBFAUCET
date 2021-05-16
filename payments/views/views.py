@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib import messages
 from django.views import generic
+from django.contrib.auth.mixins import UserPassesTestMixin
 
 from ..models import FaucetModel, Statistic
 
@@ -25,3 +26,12 @@ def home(request):
 def prerequisite(request):
     return render(request, "prerequisite.html")
 
+
+class PaymentIndex( UserPassesTestMixin, generic.ListView):
+    template_name = "payment_index.html"
+
+    def get_queryset(self):
+        return FaucetModel.objects.order_by('status')
+
+    def test_func(self):
+        return self.request.user.is_staff
