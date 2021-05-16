@@ -36,6 +36,7 @@
 </div>
 <div>
 
+{% if object_list.stats %}
 <div class="container text-center py-5">
     <h3>Statistics</h3>
     <div class="row">
@@ -43,7 +44,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Total Payments</h5>
-                    <p class="card-text">1032</p>
+                    <p class="card-text">{{ object_list.stats.total_payments }}</p>
                   </div>
             </div>
         </div>
@@ -51,7 +52,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Total TNBC Paid</h5>
-                    <p class="card-text">158540</p>
+                    <p class="card-text">{{ object_list.stats.total_tnbc_paid }}</p>
                   </div>
             </div>
         </div>
@@ -59,13 +60,13 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Average TNBC Paid</h5>
-                    <p class="card-text">49.5</p>
+                    <p class="card-text">{{ object_list.stats.average_tnbc_paid }}</p>
                   </div>
             </div>
         </div>
     </div>
 </div>
-</div>
+{% endif %}
 
 <div class="text-center py-5 bg-light">
 <h3> Recent Faucet Payments</h3>
@@ -80,24 +81,20 @@
         </tr>
       </thead>
       <tbody>
+      {% if object_list.payments %}
+      {% for payment in object_list.payments %}
         <tr>
-          <th scope="row">1</th>
-          <td>48</td>
-          <td>22d0f0047b572a6acb6615f7aae646b0b96ddc58bfd54ed2775f885baeba3d6a</td>
+          <th scope="row">{{ payment.id }}</th>
+          <td>{{ payment.amount }}</td>
+          <td>{{ payment.account_number}}</td>
+          {% if payment.status == 0 %}
           <td><button type="button" class="btn btn-danger btn-sm px-3">UNPAID</button></td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>50</td>
-          <td>22d0f0047b572a6acb6615f7aae646b0b96ddc58bfd54ed2775f885baeba3d6a</td>
+          {% else %}
           <td><button type="button" class="btn btn-success btn-sm px-3">PAID</button></td>
+          {% endif %}
         </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>50</td>
-          <td>22d0f0047b572a6acb6615f7aae646b0b96ddc58bfd54ed2775f885baeba3d6a</td>
-          <td><button type="button" class="btn btn-danger btn-sm px-3">UNPAID</button></td>
-        </tr>
+        {% endfor %}
+        {% endif %}
       </tbody>
     </table>
 </div>

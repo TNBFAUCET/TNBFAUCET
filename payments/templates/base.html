@@ -6,7 +6,7 @@
   <meta content='maximum-scale=1.0, initial-scale=1.0, width=device-width' name='viewport'>
   <meta content="ie=edge" http-equiv="x-ua-compatible">
   <title>TNBC faucet for tnb</title>
-  <link href="img/favicon.ico" rel="icon">
+  <link href="{% static 'img/favicon.ico' %}" rel="icon">
   <link href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
   <!-- MDB -->
@@ -27,6 +27,11 @@
           <li class="nav-item active">
             <a class="nav-link" href="https://discord.gg/5PqBDZfFRe" role="button" target="_blank">Get Help</a>
           </li>
+          {% if request.user.is_staff %}
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'add-payment' %}" role="button">AddPayment</a>
+          </li>
+          {% endif %}
         </ul>
       </div>
     </div>

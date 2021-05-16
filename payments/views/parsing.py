@@ -1,18 +1,12 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import user_passes_test
 from django.contrib import messages
 
-from .models import FaucetModel
-from .forms import FaucetForm
-from .core import parser
+from ..models import FaucetModel
+from ..forms import FaucetForm
+from ..core import parser
 
 
-def home(request):
-    return render(request, "index.html")
-
-def prerequisite(request):
-    return render(request, "prerequisite.html")
-
-# Create your views here.
 def validate_twitter_account_or_account_number_exists(account_number: str, twitter_id: int):
     """Same twitter account id or account number cannot be used again
     Args:
@@ -29,6 +23,8 @@ def validate_twitter_account_or_account_number_exists(account_number: str, twitt
     else:
         return True
 
+
+@user_passes_test(lambda u: u.is_staff)
 def faucet_view(request):
     form = FaucetForm()
     if request.method == 'POST':
@@ -76,4 +72,3 @@ def faucet_view(request):
     }
 
     return render(request, 'parser_form.html', context)
-
