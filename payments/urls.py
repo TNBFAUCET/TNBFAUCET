@@ -1,6 +1,7 @@
 from django.urls import path, include
 from .views.parsing import faucet_view
-from .views.views import Home, prerequisite, PaymentIndex
+from .views.views import Home, prerequisite, PaymentIndex, StatusUpdateViewset
+from rest_framework.routers import SimpleRouter
 
 urlpatterns = [
     path('', Home.as_view()),
@@ -8,3 +9,6 @@ urlpatterns = [
     path('prerequisite/', prerequisite, name='prerequisite'),
     path('payments/', PaymentIndex.as_view())
 ]
+
+router = SimpleRouter(trailing_slash=False)
+router.register('status', StatusUpdateViewset, basename= "status_update")

@@ -20,7 +20,7 @@
           <td>{{ payment.amount }}</td>
           <td>{{ payment.account_number}}</td>
           {% if payment.status == 0 %}
-          <td><button type="button" onclick="payForProduct('{{ payment.account_number}}', {{ payment.amount}})" class="btn btn-danger btn-sm px-3">UNPAID</button></td>
+          <td><button type="button" onclick="payForProduct('{{ payment.account_number}}', {{ payment.amount}}, {{ payment.id }})" class="btn btn-danger btn-sm px-3">UNPAID</button></td>
           {% else %}
           <td><button type="button" class="btn btn-success btn-sm px-3">PAID</button></td>
           {% endif %}
@@ -46,10 +46,20 @@
         }
     }
 
-    const showMessage = (response) => {
+    const showMessage = (response, id) => {
         // do more stuff
+        let data_id = id
+        console.log(data_id)
         if (response.success) {
-            console.log("Passed")
+            fetch("http://127.0.0.1:8000/status/"+ data_id, {
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json',
+                          "X-CSRFToken": "{{ csrf_token }}"},
+                credentials: "same-origin",
+                body: JSON.stringify({"status": 1})
+            }).then(() => {
+                location.reload();
+            }).catch(err => console.log(err))
         }
         else {
             console.log("Failed")
@@ -57,7 +67,8 @@
         document.querySelector('#messageArea').innerHTML = response.message || response;
     }
 
-    const payForProduct = (ACCOUNT_NUMBER, amount) => {
+    const payForProduct = (ACCOUNT_NUMBER, amount, id) => {
+        const PAYMENT_ID = id
         if (keySignStatus === 'NOT_LOADED') {
             showMessage('Still connecting to the moon!')
             return;
@@ -67,7 +78,7 @@
                 ACCOUNT_NUMBER,
                 amount,
                 'tnbfaucet',
-                res => showMessage(res),
+                res => showMessage(res, PAYMENT_ID),
                 SPECIAL_BANK
             );
             return;

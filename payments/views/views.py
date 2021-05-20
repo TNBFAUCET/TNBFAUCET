@@ -3,7 +3,11 @@ from django.contrib import messages
 from django.views import generic
 from django.contrib.auth.mixins import UserPassesTestMixin
 
+from rest_framework import viewsets, mixins
+from rest_framework.permissions import IsAdminUser
+
 from ..models import FaucetModel, Statistic
+from ..serializers import StatusSerializer
 
 
 class Home(generic.ListView):
@@ -27,7 +31,7 @@ def prerequisite(request):
     return render(request, "prerequisite.html")
 
 
-class PaymentIndex( UserPassesTestMixin, generic.ListView):
+class PaymentIndex(UserPassesTestMixin, generic.ListView):
     template_name = "payment_index.html"
 
     def get_queryset(self):
@@ -35,3 +39,12 @@ class PaymentIndex( UserPassesTestMixin, generic.ListView):
 
     def test_func(self):
         return self.request.user.is_staff
+
+
+class StatusUpdateViewset(mixins.UpdateModelMixin, viewsets.GenericViewSet):
+    """
+    ViewSet for Recent Trades.
+    """
+    queryset = FaucetModel.objects.all()
+    serializer_class = StatusSerializer
+    permission_classes = (IsAdminUser,)
