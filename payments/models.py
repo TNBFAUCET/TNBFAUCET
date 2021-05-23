@@ -33,6 +33,9 @@ class Statistic(models.Model):
     average_tnbc_paid = models.IntegerField(default=0)
     amount_paid_in_usd = models.IntegerField(default=0)
 
+    def actual_paid_in_usd(self):
+        return (self.amount_paid_in_usd / 10000)
+
     def __str__(self):
         return f'{self.total_payments} - {self.total_tnbc_paid} - {self.average_tnbc_paid}'
 
