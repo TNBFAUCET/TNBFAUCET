@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib import messages
 
-from ..models import FaucetModel
-from ..forms import FaucetForm
+from ..models import Payment
+from ..forms import PaymentForm
 from ..core import parser
 
 
@@ -17,8 +17,8 @@ def validate_twitter_account_or_account_number_exists(account_number: str, twitt
         account_number, twitter_id: Account object, Twitter ID in the else case
     """
 
-    if FaucetModel.objects.filter(user_twitter_id=twitter_id).exists() \
-            or FaucetModel.objects.filter(account_number=account_number).exists():
+    if Payment.objects.filter(user_twitter_id=twitter_id).exists() \
+            or Payment.objects.filter(account_number=account_number).exists():
         return False
     else:
         return True
@@ -26,9 +26,9 @@ def validate_twitter_account_or_account_number_exists(account_number: str, twitt
 
 @user_passes_test(lambda u: u.is_staff)
 def faucet_view(request):
-    form = FaucetForm()
+    form = PaymentForm()
     if request.method == 'POST':
-        form = FaucetForm(request.POST)
+        form = PaymentForm(request.POST)
         if form.is_valid():
             url_str = form.cleaned_data['url']
             amount = form.cleaned_data['amount']
@@ -39,7 +39,7 @@ def faucet_view(request):
                 account = validate_twitter_account_or_account_number_exists(receiver_account_number, user_id)
 
                 if account:
-                    post_model, created = FaucetModel.objects.get_or_create(
+                    post_model, created = Payment.objects.get_or_create(
                         account_number=receiver_account_number,
                         user_twitter_id=user_id,
                         amount=amount,

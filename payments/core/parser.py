@@ -80,5 +80,3 @@ def process(tweet_url, amount):
 
 if __name__ == '__main__':
     pass
-
-print(process('https://twitter.com/oshioki4/status/1372101447794368512', 50))
