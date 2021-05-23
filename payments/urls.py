@@ -7,7 +7,7 @@ urlpatterns = [
     path('', Home.as_view()),
     path('add-payment/', faucet_view, name='add-payment'),
     path('prerequisite/', prerequisite, name='prerequisite'),
-    path('payments/', PaymentIndex.as_view())
+    path('payments/', PaymentIndex.as_view(), name='payments')
 ]
 
 router = SimpleRouter(trailing_slash=False)

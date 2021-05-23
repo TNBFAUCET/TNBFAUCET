@@ -40,27 +40,35 @@
 <div class="container text-center py-5">
     <h3>Statistics</h3>
     <div class="row">
-        <div class="col">
-            <div class="card">
+        <div class="col-xl-3 col-lg-6">
+            <div class="card mb-2">
                 <div class="card-body">
                     <h5 class="card-title">Total Payments</h5>
                     <p class="card-text">{{ object_list.stats.total_payments }}</p>
                   </div>
             </div>
         </div>
-        <div class="col">
-            <div class="card">
+        <div class="col-xl-3 col-lg-6">
+            <div class="card mb-2">
                 <div class="card-body">
                     <h5 class="card-title">Total TNBC Paid</h5>
                     <p class="card-text">{{ object_list.stats.total_tnbc_paid }}</p>
                   </div>
             </div>
         </div>
-        <div class="col">
-            <div class="card">
+        <div class="col-xl-3 col-lg-6">
+            <div class="card mb-2">
                 <div class="card-body">
                     <h5 class="card-title">Average TNBC Paid</h5>
                     <p class="card-text">{{ object_list.stats.average_tnbc_paid }}</p>
+                  </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">Amount Paid in USD</h5>
+                    <p class="card-text">{{ object_list.stats.amount_paid_in_usd }}</p>
                   </div>
             </div>
         </div>
