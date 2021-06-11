@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="py-5 text-center bg-light">
+    <h3>Steps to complete Faucet</h3>
+  <div class="container pt-3">
+    <div class="row">
+      <div class="col-md-6 mb-2">
+        <div class="card text-center">
+          <div class="card-header">Step 1</div>
+          <div class="card-body">
+            <h5 class="card-title">Send Tweet</h5>
+            <p class="card-text">
+              This link is to be submitted in the survey
+            </p>
+            <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Ftnbfaucet.com&text=My%20twitter%20verification%3A%20%3CYour%20account%20number%3E&hashtags=TNB%2CTNBC%2Cverify%2CCrypto%2Ccryptocurrency%2CTNBFaucet" class="btn btn-primary" target="_blank">Tweet</a>
+          </div>
+          <div class="card-footer text-muted">Click <a href="prerequisite.html" role="button" target="_blank">here</a> to make an Account Number if you don't have one</div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card text-center">
+          <div class="card-header">Step 2</div>
+          <div class="card-body">
+            <h5 class="card-title">Complete survey</h5>
+            <p class="card-text">
+              You will not receive coins automatically.
+            </p>
+            <a href="https://forms.gle/zjSqNs5kr5BHqMVu8" class="btn btn-primary" role="button" target="_blank">Complete</a>
+          </div>
+          <div class="card-footer text-muted">You must complete the survey to receive coins.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+
+{% if object_list.stats %}
+<div class="container text-center py-5">
+    <h3>Statistics</h3>
+    <div class="row">
+        <div class="col-xl-3 col-lg-6">
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">Total Payments</h5>
+                    <p class="card-text">{{ object_list.stats.total_payments }}</p>
+                  </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">Total TNBC Paid</h5>
+                    <p class="card-text">{{ object_list.stats.total_tnbc_paid }}</p>
+                  </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">Average TNBC Paid</h5>
+                    <p class="card-text">{{ object_list.stats.average_tnbc_paid }}</p>
+                  </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">Amount Paid in USD</h5>
+                    <p class="card-text">{{ object_list.stats.actual_paid_in_usd }}</p>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="text-center py-5 bg-light">
+<h3> Recent Faucet Payments</h3>
+<div class="container w-75 table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr class="table-primary">
+          <th scope="col">#</th>
+          <th scope="col">Coins</th>
+          <th scope="col">Account Number</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% if object_list.payments %}
+      {% for payment in object_list.payments %}
+        <tr>
+          <th scope="row">{{ payment.id }}</th>
+          <td>{{ payment.amount }}</td>
+          <td>{{ payment.account_number}}</td>
+          {% if payment.status == 0 %}
+          <td><button type="button" class="btn btn-danger btn-sm px-3">UNPAID</button></td>
+          {% else %}
+          <td><button type="button" class="btn btn-success btn-sm px-3">PAID</button></td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+</div>
+</div>
+
+<footer class="bg-light text-center text-lg-start">
+<!-- Copyright -->
+<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+TNB Faucet
+</div>
+<!-- Copyright -->
+</footer>
+{% endblock %}
+{% block javascript %}
+<!-- MDB -->
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.js"
+></script>
+{% endblock %}

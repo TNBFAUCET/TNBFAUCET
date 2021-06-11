@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center py-5 bg-light">
+<h3> Recent Faucet Payments</h3>
+<div class="container w-75 table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr class="table-primary">
+          <th scope="col">#</th>
+          <th scope="col">Coins</th>
+          <th scope="col">Account Number</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% if object_list %}
+      {% for payment in object_list %}
+        <tr>
+          <th scope="row">{{ payment.id }}</th>
+          <td>{{ payment.amount }}</td>
+          <td>{{ payment.account_number}}</td>
+          {% if payment.status == 0 %}
+          <td><button type="button" onclick="payForProduct('{{ payment.account_number}}', {{ payment.amount}}, {{ payment.id }})" class="btn btn-danger btn-sm px-3">UNPAID</button></td>
+          {% else %}
+          <td><button type="button" class="btn btn-success btn-sm px-3">PAID</button></td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+        {% endif %}
+      </tbody>
+    </table>
+</div>
+    <div id="messageArea" style="margin: 20px"></div>
+</div>
+{% endblock %}
+{% block javascript %}
+<script>
+    let keySignStatus = 'NOT_LOADED' // NOT_PRESENT | NOT_LOADED | LOADED;
+    const SPECIAL_BANK = 'http://54.177.121.3';
+
+    window.onload = () => {
+        if (tnb_keysign) {
+            tnb_keysign.requestHandshake(() => keySignStatus = 'LOADED');
+        }else {
+            keySignStatus = 'NOT_PRESENT'
+        }
+    }
+
+    const showMessage = (response, id) => {
+        // do more stuff
+        let data_id = id
+        console.log(data_id)
+        if (response.success) {
+            fetch("http://127.0.0.1:8000/status/"+ data_id, {
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json',
+                          "X-CSRFToken": "{{ csrf_token }}"},
+                credentials: "same-origin",
+                body: JSON.stringify({"status": 1})
+            }).then(() => {
+                location.reload();
+            }).catch(err => console.log(err))
+        }
+        else {
+            console.log("Failed")
+        }
+        document.querySelector('#messageArea').innerHTML = response.message || response;
+    }
+
+    const payForProduct = (ACCOUNT_NUMBER, amount, id) => {
+        const PAYMENT_ID = id
+        if (keySignStatus === 'NOT_LOADED') {
+            showMessage('Still connecting to the moon!')
+            return;
+        }
+        if (keySignStatus === 'LOADED') {
+            tnb_keysign.requestTransfer(
+                ACCOUNT_NUMBER,
+                amount,
+                'tnbfaucet',
+                res => showMessage(res, PAYMENT_ID),
+                SPECIAL_BANK
+            );
+            return;
+        }
+        showMessage('Sorry, unable to find the moon!')
+    }
+
+</script>
+{% endblock %}
