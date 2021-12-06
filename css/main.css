@@ -13,6 +13,8 @@ a {
    max-width: 1366px;
 }
 
+/* Navbar */
+
 nav {
    background: #FFFFFF;
 box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.04);
@@ -68,4 +70,24 @@ padding: 0 80px;
 
 .nav-bar .nav-list  .website-link img{
    margin-left: 8px;
+}
+
+
+/* Hero */
+.hero {
+   padding: 108px 80px;
+}
+
+.hero-content .hero-heading {
+   color: #2A3945;
+   font-weight: 600;
+   font-size: 44px;
+   line-height: 130%;
+   margin-bottom: 8px;
+}
+
+.hero-content .hero-tagline {
+   font-size: 20px;
+   line-height: 150%;
+   color: #4F5E6B;
 }
