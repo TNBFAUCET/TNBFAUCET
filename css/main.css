@@ -194,3 +194,16 @@ padding: 0 80px;
    margin-bottom: 48px;
    max-width: 720px;
 }
+
+
+/* Footer */
+footer {
+   height: 116px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+footer .social-link:not(:last-child) {
+   margin-right: 32px;
+}
