@@ -11,6 +11,23 @@ a {
 
 .container {
    max-width: 1366px;
+   margin: 0 auto;
+}
+
+.btn {
+   padding: 10px 16px;
+   height: 48px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: fit-content;
+   border-radius: 100px;
+}
+
+.btn-primary {
+   background:#0085FF;
+   color: #FFFFFF;
+   min-width: 200px;
 }
 
 /* Navbar */
@@ -91,3 +108,51 @@ padding: 0 80px;
    line-height: 150%;
    color: #4F5E6B;
 }
+
+
+/* Steps */
+.steps {
+   display: grid;
+   grid-template-columns: repeat(3, auto);
+   gap: 24px;
+   padding: 0 80px 108px;
+}
+
+.steps .step {
+   padding: 32px 32px 48px;
+}
+
+.steps .step .step-number {
+   background:  rgba(0, 133, 255, 0.08);
+   display: grid;
+   place-items: center;
+   font-weight: 600;
+   font-size: 24px;
+   line-height: 130%;
+   color: #0085FF;
+   width: 48px;
+   height: 48px;
+   border-radius: 24px;
+   margin-bottom: 24px;
+}
+
+.steps .step .step-heading {
+   font-weight: 600;
+   font-size: 24px;
+   line-height: 130%;
+   color: #3C4B57;
+   margin-bottom: 8px;
+}
+
+.steps .step .step-description {
+   font-size: 14px;
+   line-height: 130%;
+   color: #697986;
+   margin-bottom: 48px;
+   font-weight: normal;
+}
+
+.step-platform:not(:last-child) {
+   margin-right: 8px;
+}
+
