@@ -1,0 +1,71 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   font-family: 'Inter', sans-serif;
+}
+
+a {
+   text-decoration: none;
+}
+
+.container {
+   max-width: 1366px;
+}
+
+nav {
+   background: #FFFFFF;
+box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.04);
+padding: 0 80px;
+}
+
+.nav-bar {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   height: 72px;
+}
+
+.nav-bar .brand {
+   display: flex;
+   align-items: center;
+}
+
+.nav-bar .brand .brand-logo {
+   margin-right: 8px;
+}
+
+.nav-bar .brand .brand-name {
+   font-weight: 500;
+}
+
+.nav-bar .nav-list {
+   display: flex;
+   align-items: center;
+}
+
+.nav-bar .nav-list .nav-list-item {
+   display: flex;
+   align-items: center;
+}
+
+.nav-bar .nav-list .nav-list-item:not(:last-child) {
+   margin-right: 40px;
+}
+
+.nav-bar .nav-list .discord-link {
+   font-weight: 700;
+   color: #5865F2;
+}
+
+.nav-bar .nav-list .discord-link img{
+   margin-right: 8px;
+}
+
+.nav-bar .nav-list .website-link {
+   color: #042235;
+}
+
+.nav-bar .nav-list  .website-link img{
+   margin-left: 8px;
+}
