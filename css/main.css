@@ -43,11 +43,9 @@ a {
 
 
 /* Navbar */
-
 nav {
    background: #FFFFFF;
 box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.04);
-padding: 0 80px;
 }
 
 .nav-bar {
@@ -104,7 +102,12 @@ padding: 0 80px;
 
 /* Hero */
 .hero {
-   padding: 108px 80px;
+   padding: 108px 0px;
+   display: flex;
+}
+
+.hero-content {
+   flex: 1;
 }
 
 .hero-content .hero-heading {
@@ -121,13 +124,38 @@ padding: 0 80px;
    color: #4F5E6B;
 }
 
+.hero-images {
+   position: relative;
+   flex: 1;
+}
+
+.hero-images #purple-img {
+   position: absolute;
+   top: 50%;
+   transform: translateY(-50%);
+   right: 25%;
+}
+
+.hero-images #green-img {
+   position: absolute;
+   top: 0%;
+   transform: translateY(-80%);
+   right: 8%;
+}
+
+.hero-images #pink-img {
+   position: absolute;
+   top: 75%;
+   right: 0;
+}
+
 
 /* Steps */
 .steps {
    display: grid;
    grid-template-columns: repeat(3, auto);
    gap: 24px;
-   padding: 0 80px 108px;
+   padding-bottom: 108px;
 }
 
 .steps .step {
