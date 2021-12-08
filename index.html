@@ -19,7 +19,7 @@
             <img class="brand-logo" src="./img/tnb-logo.webp" alt="thenewboston">
             <h3 class="brand-name">Faucet</h3>
          </div>
-         <div class="nav-list">
+         <div class="nav-list hide-on-md">
             <a class="nav-list-item discord-link" target="_blank" href="https://discord.com/invite/thenewboston"
                noreferrer noopenner>
                <img src="./img/discord-logo.webp" alt="Discord">
@@ -30,8 +30,22 @@
                <img src="./icons/external-link.webp" alt="thenewboston">
             </a>
          </div>
+
+         <img id="menu-btn" class="show-on-md" src="./icons/menu.webp" alt="Menu" role="button" tabindex="0">
       </div>
+
    </nav>
+   <div id="mobile-nav" class="mobile-nav show-on-md">
+      <a class="nav-list-item discord-link" target="_blank" href="https://discord.com/invite/thenewboston" noreferrer
+         noopenner>
+         <img src="./img/discord-logo.webp" alt="Discord">
+         Discord
+      </a>
+      <a class="nav-list-item website-link" href="https://thenewboston.com" noreferrer noopenner>
+         thenewboston.com
+         <img src="./icons/external-link.webp" alt="thenewboston">
+      </a>
+   </div>
 
    <header class="container hero">
       <div class="hero-content">
@@ -132,6 +146,13 @@
          <img src="./icons/linkedin.webp" alt="LinkedIn">
       </a>
    </footer>
+
+   <script>
+      document.getElementById('menu-btn').addEventListener('click', () => {
+         const menu = document.getElementById('mobile-nav');
+         menu.classList.toggle('open');
+      })
+   </script>
 </body>
 
 </html>

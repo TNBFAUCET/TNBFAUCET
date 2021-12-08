@@ -41,6 +41,14 @@ a {
    margin-left: 8px;
 }
 
+.hide-on-md {
+   display: block;
+}
+
+.show-on-md {
+   display: none;
+}
+
 body {
    background: #F7FAFC;
 }
@@ -50,6 +58,7 @@ body {
 nav {
    background: #FFFFFF;
 box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.04);
+z-index: 2;
 }
 
 .nav-bar {
@@ -86,21 +95,52 @@ box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.04);
    margin-right: 40px;
 }
 
-.nav-bar .nav-list .discord-link {
+.nav-bar .nav-list .discord-link, .mobile-nav .discord-link{
    font-weight: 700;
    color: #5865F2;
 }
 
-.nav-bar .nav-list .discord-link img{
+.nav-bar .nav-list .discord-link img, .mobile-nav .discord-link img{
    margin-right: 8px;
 }
 
-.nav-bar .nav-list .website-link {
+.nav-bar .nav-list .website-link, .mobile-nav .website-link {
    color: #042235;
 }
 
-.nav-bar .nav-list  .website-link img{
+.nav-bar .nav-list .website-link img, .mobile-nav .website-link img{
    margin-left: 8px;
+}
+
+#menu-btn {
+   cursor: pointer;
+}
+
+.mobile-nav {
+   position: absolute;
+   left: 0;
+   background: #FFFFFF;
+   width: 100%;
+   padding: 16px 24px;
+   border-bottom-left-radius: 24px;
+   border-bottom-right-radius: 24px;
+   transition: 0.2s ease-in-out top;
+   top: -200px;
+   z-index: 1;
+}
+
+.mobile-nav.open {
+   top: 72px;
+}
+
+.mobile-nav .nav-list-item {
+   display: flex;
+   align-items: center;
+   padding: 20px 0;
+}
+
+.mobile-nav .nav-list-item:not(:last-child) {
+   border-bottom: 1px solid #E2E9EF;
 }
 
 
@@ -307,6 +347,14 @@ footer .social-link:not(:last-child) {
 }
 
 @media (max-width: 768px) {
+   .hide-on-md {
+      display: none!important;
+   }
+
+   .show-on-md {
+      display: block;
+   }
+
    .container {
       padding: 0 24px;
    }
